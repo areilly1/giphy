@@ -4,10 +4,12 @@
 /* global $ */
 
 
-
 $(".search-button").click(function(){
    let userInput = $(".search-term").val()
    let mainUrl =   `https://api.giphy.com/v1/gifs/search?q='${userInput}'&rating=pg&api_key=dc6zaTOxFJmzC`;
+
+  let max  =  mainUrl.length
+  let randomNumber = Math.floor(Math.random() * max)
    
   fetch(mainUrl)
     .then(function(response) {
@@ -16,9 +18,9 @@ $(".search-button").click(function(){
 })
     .then(function(data) {
     // console.log(data.data[0].images.original.url)
-    let imgUrl = data.data[0].images.original.url;
+    let imgUrl = data.data[randomNumber].images.original.url;
     let imgEl = '<img src=' + imgUrl + '>';
-    $('.main').append(imgEl);
+    $('.main').html(imgEl);
   
 });
  
